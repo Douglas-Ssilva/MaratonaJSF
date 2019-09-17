@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+<h:head></h:head>
+<f:metadata>
+	<f:viewAction action="#{html5WithJSF.init}"></f:viewAction>
+</f:metadata>
+<h:body>
+<h1>HTML5 with JSF, melhor forma: Email</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Input HTML5: "/>
+			<input type="email" placeholder="Type your email"/>
+			<h:outputLabel value="Input JSF: "/>
+			<h:inputText value="#{ajaxBean.nome}" pt:type="email" pt:placeholder="Type your email" pt:autofocus="true"/> <!-- When load, cursor aparecerá aqui -->
+		</h:panelGrid>
+		
+<h1>Outra forma de juntar: Data</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Input data HTML5"/>
+			<input type="date"/>
+			<h:outputLabel value="Input data JSF"/>
+			<h:inputText>
+				<f:passThroughAttribute name="type" value="date"></f:passThroughAttribute>
+			</h:inputText>
+		</h:panelGrid>
+		
+<h1>Mais uma forma de juntar: Number</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Input number HTML5"/>
+			<input type="number" placeholder="Type the numbers" min="0" max="100" step="10"/> <!-- step=salto -->
+			<h:outputLabel value="Input number JSF"/>
+			<h:inputText>
+				<f:passThroughAttributes value="#{html5WithJSF.map}"/>
+			</h:inputText>
+		</h:panelGrid>
+		
+		
+<h1>URL</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Input url HTML5"/>
+			<input type="url" placeholder="Type your url"/>
+			<h:outputLabel value="Input url JSF"/>
+			<h:inputText pt:type="url" pt:placeholder="Type your url"/>
+		</h:panelGrid>
+		
+<h1>Phone</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Input range HTML5"/>
+			<input type="range" placeholder="Type your range"/>
+			<h:outputLabel value="Input range JSF"/>
+			<h:inputText pt:type="range" pt:placeholder="Type your range"/>
+		</h:panelGrid>
+
+<h1>Color</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Input color HTML5"/>
+			<input type="color"/>
+			<h:outputLabel value="Input color JSF"/>
+			<h:inputText pt:type="color"/>
+		</h:panelGrid>
+		
+<h1>Radio</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Input radio HTML5"/>
+			<input type="radio" name="radio"/> <!-- É preciso terem a mesma classe pra selecionarmos um ou outro -->
+			<input type="radio" name="radio"/>
+			<h:outputLabel value="Input radio JSF"/>
+			<h:inputText pt:type="radio" pt:name="jsfRadio"/>
+			<h:inputText pt:type="radio" pt:name="jsfRadio" pt:checked="true"/> <!-- Ficar selecionado -->
+		</h:panelGrid>
+		
+<h1>Checkbox</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Douglas"/>
+			<input type="checkbox"></input> 
+			<h:outputLabel value="Tatai"/>
+			<h:inputText pt:type="checkbox"></h:inputText> 
+		</h:panelGrid>
+		
+<h1>File</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="File HTML5"/>
+			<input type="file"/> 
+			<h:outputLabel value="File JSF"/>
+			<h:inputText pt:type="file"/> 
+		</h:panelGrid>
+		
+<h1>Time</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Time HTML5"/>
+			<input type="time"/> 
+			<h:outputLabel value="Time JSF"/>
+			<h:inputText pt:type="time"/> 
+		</h:panelGrid>
+	</h:form>
+</h:body>	  
+
+</html>

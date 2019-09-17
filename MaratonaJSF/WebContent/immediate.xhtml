@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:o="http://omnifaces.org/ui">
+	  
+<h:head></h:head>
+
+<h:body>
+	<h:form>
+	<h1>Immediate</h1>
+		<h:panelGrid >
+			<p:messages autoUpdate="true"/>
+			<h:column>
+			<!-- Tem que passar no text é um number p validar -->
+				<h:inputText value="#{comunicationUsingSession2.estudante2.nome}" converter="javax.faces.Number" immediate="true"/><br/>
+				<h:inputText value="#{comunicationUsingSession2.estudante2.sobrenome}" converter="javax.faces.BigDecimal"/><br/>
+				<p:commandButton value="Back" action="comunication-session?faces-redirect=true" immediate="true"/>
+			</h:column>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+
+</html>

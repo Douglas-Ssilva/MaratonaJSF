@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+<flow-definition id="pendencies">
+<!-- Temos que ficar dentro do flow que nos chamou, dele conseguimos sair, do que está dentro não -->
+	<flow-return id="exit">
+			<from-outcome>/registration/registration3</from-outcome>
+	</flow-return>
+
+	<!-- Chamando o flow de fora, depois do retorno do método desta flow -->
+	<flow-return id="exitToRegistration">
+		<from-outcome>/registration/registration3</from-outcome>
+	</flow-return>
+	
+	
+
+<!-- Recebendo parâmentros -->
+<inbound-parameter>
+	<name>userName</name>
+	<value>#{flowScopedAninhado.userName}</value>
+</inbound-parameter>
+
+<inbound-parameter>
+	<name>lastName</name>
+	<value>#{flowScopedAninhado.lastName}</value>
+</inbound-parameter>
+</flow-definition>    
+    
+</faces-config>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://java.sun.com/jsf/html" 
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:of="http://omnifaces.org/functions"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+		
+<h:head></h:head>
+
+<h:body>
+<h1>Comunication pegando param definido no web.xml</h1>
+	<h:form id="form">
+		<h:outputLabel value="Objeto implicitamente imbutido: #{facesContext.externalContext.getInitParameter('image.com')}"/><br/>
+		<h:commandButton value="Print parameter" actionListener="#{comunicationBean.printAttributes()}"/>
+	</h:form>
+	
+	<h1>Passando param por meio do MB</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome:"/>
+			<h:inputText value="#{comunicationBean.nome}"/>
+			
+			<h:outputLabel value="Sobrenome"/>
+			<h:inputText value="#{comunicationBean.sobrenome}"/>
+			
+			<h:commandButton value="Comunication2" action="#{comunicationBean.toSail()}"/>
+		</h:panelGrid>
+	</h:form>
+	
+	<!-- Passando param por meio da view -->
+	<h1>Passando param por meio da view</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+		<h:outputLabel value="Nome:"/>
+			<h:inputText value="#{comunicationBean.nome}"/>
+			
+			<h:outputLabel value="Sobrenome"/>
+			<h:inputText value="#{comunicationBean.sobrenome}"/>
+			
+			<!-- command tem por padrão o post, quando forçamos o redirecionamento ele perde os valores do param -->
+			<h:commandButton value="Comunication2CommandButton" action="comunication2">
+				<f:param name="nome" value="Douglas"/>
+				<f:param name="sobrenome" value="Silva"/>
+			</h:commandButton>
+			
+			<!-- resolvemos isso então com o button -->
+			<h:button value="Comunication2Button" outcome="comunication2?faces-redirect=true">
+				<f:param name="nome" value="Douglas"/>
+				<f:param name="sobrenome" value="Silva"/>
+			</h:button>
+			
+			<!-- link tem o mesmo efeito do button-->
+			<h:link value="Comunication2Link" outcome="comunication2">
+				<f:param name="nome" value="Douglas"/>
+				<f:param name="sobrenome" value="Silva"/>
+			</h:link><br/>
+			
+	<h1>Passando param por meio da view, usando a tag viewParam</h1>
+			<!-- Tem o viewParam na comunication3 p receber -->
+			<h:button value="Comunication3" outcome="comunication3">
+				<f:param name="nome" value="Geraldo"/>
+				<f:param name="sobrenome" value="Silva"/>
+				<f:param name="data" value="#{comunicationBean.date}"/>
+				<f:param name="dataString" value="#{comunicationBean.dataString}"/>
+				<f:param name="dataConverter" value="#{comunicationBean.date}"/>
+				
+				<!-- Faz a conversão automaticamente aqui do objeto Date p String-->
+				<f:param name="dataOminiFaces" value="#{of:formatDate(comunicationBean.date, 'dd-MM-yyyy')}"/>
+			</h:button>
+	</h:panelGrid>		
+	</h:form>
+	
+	<h1>Usando commandButton com alguns parametros</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome:"/>
+			<h:inputText value="#{comunicationResultBean.nome}"/>
+			
+			<h:outputLabel value="Sobrenome"/>
+			<h:inputText value="#{comunicationResultBean.sobrenome}"/>
+			
+		<h:commandButton value="Result" action="result?faces-redirect=true&amp;includeViewParams=true"/>
+		<h:commandButton value="ResultBean" action="#{comunicationResultBean.save()}"/>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

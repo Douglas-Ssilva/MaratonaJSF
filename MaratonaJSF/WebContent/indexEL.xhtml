@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" 
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+<h:head>
+</h:head>
+<h:body>
+<!-- Comentários -->
+	<h:outputLabel value="#{estudanteBean.nome}"/><br/>
+	<h:outputText  value="Não é renderizada em tag para HTML"/><br/>
+	<h:outputLabel value="É renderizada para label"/><br/>
+	<h:outputLabel value="Outra forma de pegar valor: #{estudanteBean['sobrenome']}"/><br/>
+	<h:outputLabel value="Comparando notas 1 e 2 (eq ou ==): #{estudanteBean.nota1 eq estudanteBean.nota2}"/><br/>
+	<h:outputLabel value="Comparando nome (equals): #{estudanteBean.nome.equals('Douglas')}"/><br/>
+	<h:outputLabel value="Comparando (and): #{estudanteBean.nome.equals('Douglas') and estudanteBean.nota2 eq 10}"/><br/>
+	<h:outputLabel value="Nota 1 é menor que 2(lt): #{estudanteBean.nota1 lt estudanteBean.nota2}"/><br/>
+	<h:outputLabel value="Nota 1 é menor ou igual que 2(le): #{estudanteBean.nota1 le estudanteBean.nota2}"/><br/>
+	<h:outputLabel value="Operação ternária: #{estudanteBean.nota1 eq 10 ? 'Sim' :'Não '}"/><br/>
+	<h:outputLabel value="Concatenando sem alterar o atributo: #{estudanteBean.nome += 'Teste'}"/><br/>
+</h:body>
+</html>

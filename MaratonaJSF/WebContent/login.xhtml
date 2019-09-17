@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" 
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:p= "http://primefaces.org/ui"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+<h:head>
+<h:outputStylesheet library="default" name="css/style.css"/>
+</h:head>
+<h:body>
+<h1>Login</h1>
+<!-- Usando internacionalização -->
+<h2>#{msg.usuarioLogado}</h2>
+	<h:form id="form">
+	<p:messages autoUpdate="true"/>
+		<h:panelGrid id="grid" columns="2">
+			<h:outputLabel value="Login: " />
+			<h:inputText value="#{loginBean.login}" required="true" requiredMessage="Prenncha o login!"/>
+			<h:outputLabel value="Senha: " />
+			<h:inputSecret value="#{loginBean.senha}" required="true" requiredMessage="Preencha a senha!"/>
+			
+			<!-- Setando em String p não ter que converter -->
+			<h:selectOneMenu value="#{loginBean.language}">
+				<f:selectItems value="#{loginBean.list}"  var="language" itemValue="#{language.language}" itemLabel="#{language.displayLanguage}"/>
+			</h:selectOneMenu><br/>
+			
+			<h:commandButton value="Entrar" action="#{loginBean.logar}" styleClass="butn"/>
+		</h:panelGrid>
+		
+	</h:form>
+</h:body>
+</html>

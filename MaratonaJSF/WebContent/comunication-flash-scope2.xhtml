@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:o="http://omnifaces.org/ui"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+<h:head></h:head>
+<!-- Execute antes  -->
+<f:metadata>
+	<f:viewAction action="#{comunicationFlashScopeBean2.init}"/>
+</f:metadata>
+
+<h:body>
+<h1>Recebendo o bean</h1>
+	<!-- Fazendo meus dados se manterem após F5 -->
+	<h:inputHidden value="#{flash.keep}"/>
+	<h:inputHidden value="#{flash.estudante}"/>
+	<h:form>
+		<h:panelGrid>
+		<h:column>
+			<h:outputLabel value="#{comunicationFlashScopeBean2.estudante.nome}"/>&nbsp;
+			<h:outputLabel value="#{comunicationFlashScopeBean2.estudante.sobrenome}"/>
+		</h:column>
+		</h:panelGrid>
+	</h:form>
+</h:body>	  
+
+</html>

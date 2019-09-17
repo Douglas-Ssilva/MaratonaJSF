@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:o="http://omnifaces.org/ui"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	  
+<h:head></h:head>
+<f:metadata>
+	<f:viewAction action="#{dataTableBean.init}"/>
+</f:metadata>
+<h:body>
+<p:importEnum type="br.com.maratonajsf.model.enums.Turno" var="Turno" allSuffix="ALL_ENUM_VALUES" />
+<h:form>
+<h1>DataTable</h1>
+<h2>List</h2>
+<!-- Funciona como se fosse o foreach, ou ui repeat -->
+	<h:dataTable value="#{dataTableBean.listEstudante}" var="estudante">
+		<h:column>
+			<f:facet name="header">
+				<h:commandLink actionListener="#{dataTableBean.orderByName('asc')}">Nome asc</h:commandLink>&nbsp;
+				<h:commandLink actionListener="#{dataTableBean.orderByName('desc')}">Nome desc</h:commandLink>
+			</f:facet>
+			<h:outputLabel value="#{estudante.nome}" rendered="#{not estudante.editing}"/>
+			<h:inputText value="#{estudante.nome}" rendered="#{estudante.editing}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">
+				<h:commandLink actionListener="#{dataTableBean.orderBySobrenome('asc')}">Sobrenome asc</h:commandLink>&nbsp;
+				<h:commandLink actionListener="#{dataTableBean.orderBySobrenome('desc')}">Sobrenome desc</h:commandLink>
+			</f:facet>
+			<h:outputLabel value="#{estudante.sobrenome}" rendered="#{not estudante.editing}"/>
+			<h:inputText value="#{estudante.sobrenome}" rendered="#{estudante.editing}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Turno</f:facet>
+			<h:outputLabel value="#{estudante.turno}" rendered="#{not estudante.editing}"/>
+			<h:selectOneMenu value="#{estudante.turno}" rendered="#{estudante.editing}">
+				<f:selectItems value="#{Turno.ALL_ENUM_VALUES}" var="turno" itemLabel="#{turno}" itemValue="#{turno}"/>
+			</h:selectOneMenu>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Opções</f:facet>
+			<!-- Será renderizado se não tivermos editando -->
+			<h:commandLink actionListener="#{dataTableBean.delete(estudante)}" rendered="#{not estudante.editing}">Delete
+				<f:ajax execute="@form" render="@form"/>
+			</h:commandLink>&nbsp;
+			<h:commandLink actionListener="#{dataTableBean.edit(estudante)}" rendered="#{not estudante.editing}">Edit
+				<f:ajax execute="@form" render="@form"/>
+			</h:commandLink>
+		</h:column>
+	</h:dataTable>
+	<h:commandButton value="Save" actionListener="#{dataTableBean.save}">
+		<f:ajax execute="@form" render="@form"/>
+	</h:commandButton>
+	
+    <h:commandButton value="Add" onclick="PF('dlg').show();" type="button" />
+     
+    <p:dialog id="dialog" header="Add Student" widgetVar="dlg" >
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel value="Name:" />
+            <p:inputText value="#{dataTableBean.estudante.nome}"/>
+             
+            <h:outputLabel value="Sobrenome:" />
+            <p:inputText value="#{dataTableBean.estudante.sobrenome}"/>
+            
+            <h:outputLabel value="Turno: " />
+            <p:selectOneMenu value="#{dataTableBean.estudante.turno}">
+            	<f:selectItems value="#{Turno.ALL_ENUM_VALUES}" var="turno" itemLabel="#{turno}" itemValue="#{turno}"/>
+            </p:selectOneMenu>
+             
+			<h:commandButton value="Add" actionListener="#{dataTableBean.add}">
+				<f:ajax execute="dialog" render="@form"/>
+			</h:commandButton>
+        </h:panelGrid>
+    </p:dialog>       
+
+
+
+<h2>Set</h2>
+<h:dataTable value="#{dataTableBean.listSetEstudante}" var="estudante">
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputLabel value="#{estudante.nome}" rendered="#{not estudante.editing}"/>
+			<h:inputText value="#{estudante.nome}" rendered="#{estudante.editing}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Sobrenome</f:facet>
+			<h:outputLabel value="#{estudante.sobrenome}" rendered="#{not estudante.editing}"/>
+			<h:inputText value="#{estudante.sobrenome}" rendered="#{estudante.editing}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Turno</f:facet>
+			<h:outputLabel value="#{estudante.turno}" rendered="#{not estudante.editing}"/>
+			<h:selectOneMenu value="#{estudante.turno}" rendered="#{estudante.editing}">
+				<f:selectItems value="#{Turno.ALL_ENUM_VALUES}" var="turno" itemLabel="#{turno}" itemValue="#{turno}"/>
+			</h:selectOneMenu>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Opções</f:facet>
+			<h:commandLink value="Delete" actionListener="#{dataTableBean.deleteSet(estudante)}" rendered="#{not estudante.editing}"/>&nbsp;
+			<h:commandLink value="Edit" actionListener="#{dataTableBean.edit(estudante)}" rendered="#{not estudante.editing}"/>
+		</h:column>
+	</h:dataTable>
+	<h:commandButton value="Save" actionListener="#{dataTableBean.saveSet}"/>
+	
+	<!-- Se não colocar o type=button, o dialogo some da tela -->
+	<!-- Add estudante. 2 dialog não funcionam na mesma view -->
+<!-- 	<h:commandButton value="Add" onclick="PF('dlgSet').show();" type="button"/> -->
+<!-- 	<p:dialog header="Add Student" widgetVar="dlgSet"> -->
+<!-- 		<h:panelGrid columns="2" cellpadding="5"> -->
+<!-- 			<p:outputLabel value="Nome: "/> -->
+<!-- 			<p:inputText value="#{dataTableBean.estudante.nome}"/> -->
+<!-- 			<p:outputLabel value="Sobrenome: "/> -->
+<!-- 			<p:inputText value="#{dataTableBean.estudante.sobrenome}"/> -->
+<!-- 			<p:outputLabel value="Selecione um turno: "/> -->
+<!-- 			<p:selectOneMenu value="#{dataTableBean.estudante.turno}"> -->
+<!-- 				<f:selectItems value="#{Turno.ALL_ENUM_VALUES}" var="turno" itemLabel="#{turno}" itemValue="#{turno}"/> -->
+<!-- 			</p:selectOneMenu> -->
+<!-- 			<h:commandButton value="Save" actionListener="#{dataTableBean.addSet}"/> -->
+<!-- 		</h:panelGrid> -->
+<!-- 	</p:dialog> -->
+	
+<h2>List LinkedList</h2>
+<h:dataTable value="#{dataTableBean.listLinkedEstudante}" var="estudante">
+		<h:column>
+			<f:facet name="header">
+				<h:commandLink actionListener="#{dataTableBean.orderByNameLinked('asc')}">Nome asc</h:commandLink>&nbsp;
+				<h:commandLink actionListener="#{dataTableBean.orderByNameLinked('desc')}">Nome desc</h:commandLink>
+			</f:facet>
+			<h:outputLabel value="#{estudante.nome}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Sobrenome</f:facet>
+			<h:outputLabel value="#{estudante.sobrenome}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Turno</f:facet>
+			<h:outputLabel value="#{estudante.turno}"/>
+		</h:column>
+	</h:dataTable>
+
+
+<h2>Map using values</h2><!-- Se não colocar os () não aparece os dados -->
+	<h:dataTable value="#{dataTableBean.mapEstudante.values()}" var="estudante">
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputLabel value="#{estudante.nome}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Sobrenome</f:facet>
+			<h:outputLabel value="#{estudante.sobrenome}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Turno</f:facet>
+			<h:outputLabel value="#{estudante.turno}"/>
+		</h:column>
+	</h:dataTable>
+	
+	<h2>Map get keys</h2>
+	<h:dataTable value="#{dataTableBean.mapEstudante.keySet()}" var="key">
+		<h:column>
+			<f:facet name="header">Chave</f:facet>
+			<h:outputLabel value="#{key}"/>
+		</h:column>
+	</h:dataTable>
+	</h:form>
+</h:body>
+
+</html>

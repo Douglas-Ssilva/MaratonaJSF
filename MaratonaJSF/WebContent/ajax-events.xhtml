@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" 
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+<h:head>
+
+</h:head>
+<h:body>
+<h1>Events Ajax</h1>
+<h2>KeyUp, a cada letra digitada</h2>
+	<h:form id="form">
+    	<h:panelGrid>
+    		<h:inputText value="#{ajaxBean.nome}" >
+    			<f:ajax event="keyup" listener="#{ajaxBean.modifyName}" render="nome"/><!-- Com o @this aqui, renderiza o input p upperCase também -->
+    		</h:inputText>
+    		<h:outputLabel value="Olhe a mágica: #{ajaxBean.nome}" id="nome"/>
+    	</h:panelGrid>
+	</h:form>
+<h2>Blur, ao perder o foco</h2>
+<h:form id="form1">
+    	<h:panelGrid columns="1">
+    		<h:inputText value="#{ajaxBean.nome}" >
+    			<f:ajax event="blur" listener="#{ajaxBean.modifyName}" render="nome"/><!-- Com o @this aqui, renderiza o input p upperCase também -->
+    		</h:inputText>
+    		<h:outputLabel value="Olhe a mágica: #{ajaxBean.nome}" id="nome"/>
+    		
+    		<h3>Seleção automática de select</h3>
+    		<h:selectOneMenu value="#{ajaxBean.keySelecionada}">
+    			<f:selectItem value="#{null}" itemLabel="[Selecione uma série]"/>
+    			<f:selectItems value="#{ajaxBean.map.keySet()}" var="key" itemLabel="#{key}" itemValue="#{key}"/><!-- Como é uma string, só chave, pego assim -->
+    			<f:ajax event="change" listener="#{ajaxBean.selecaoPersonagens}" render="personagens"/>
+    		</h:selectOneMenu>
+    		
+    		<h:selectOneMenu id="personagens" value="#{ajaxBean.valueSelecionado}">
+    			<f:selectItem value="#{null}" itemLabel="[Selecione um personagem]"/>
+    			<f:selectItems value="#{ajaxBean.valuesSelecionados}" var="personagem" itemLabel="#{personagem}" itemValue="#{personagem}"/>
+    		</h:selectOneMenu>
+    	</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

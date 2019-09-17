@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://java.sun.com/jsf/html" 
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:o="http://omnifaces.org/ui"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+		
+<h:head></h:head>
+<!-- Pra carregar esta página, espero esses param, o param que chegar, sete nesse bean -->
+<f:metadata>
+	<f:viewParam name="nome"       value="#{comunicationBean3.nome}"/>
+	<f:viewParam name="sobrenome"  value="#{comunicationBean3.sobrenome}"/>
+	<f:viewParam name="data"       value="#{comunicationBean3.data}"/>
+	<f:viewParam name="dataString" value="#{comunicationBean3.dataString}"/>
+	<f:viewParam name="dataOminiFaces" value="#{comunicationBean3.dataOminiFaces}"/>
+
+	<!-- Pego uma String e converto p Data, pegando o objeto Date não funciona-->
+	<f:viewParam name="dataString" value="#{comunicationBean3.dataConverter}">
+		<f:convertDateTime pattern="dd-MM-yyyy"/>
+	</f:viewParam>
+	
+	<!-- Antes de renderizar a view, chame esse método -->
+<!-- 	<f:event listener="#{comunicationBean3.init}" type="preRenderView"></f:event> -->
+	
+	<!-- Melhor prática pra não executar o init a cada requisição ajax, 2ºparam falo se é p executar o método a cada requisição ajax -->
+	<f:viewAction action="#{comunicationBean3.init}" onPostback="false"/>
+</f:metadata>
+
+<h:body>
+<h1>Comunication 3 passando param pela tag viewAction</h1>
+	<h:form>
+	<p:messages autoUpdate="true"/>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome: "/>
+			<h:inputText value="#{comunicationBean3.nome}" required="true" requiredMessage="Nome é obrigatório!"/>
+			<h:outputLabel value="Sobrenome "/>
+			<h:inputText value="#{comunicationBean3.sobrenome}"/>
+			<h:outputLabel value="Data "/>
+			<h:outputLabel value="#{comunicationBean3.data}"/>
+			<h:outputLabel value="DataString "/>
+			<h:outputLabel value="#{comunicationBean3.dataString}"/>
+			<h:outputLabel value="DataParseada "/>
+			<h:outputLabel value="#{comunicationBean3.dataParseada}"/>
+			
+			<h:commandButton value="Salvar" action="#{comunicationBean3.save()}"/>
+		</h:panelGrid>
+	</h:form>
+<h1>Com o form do OmniFaces ele manteve os param na URL</h1>
+	<o:form includeRequestParams="true">
+	<p:messages autoUpdate="true"/>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome: "/>
+			
+			<h:inputText value="#{comunicationBean3.nome}" required="true" requiredMessage="Nome é obrigatório!">
+			<!-- Validando campo nome com ajax, quando perder o foco -->
+				<f:ajax event="blur"/>
+			</h:inputText>
+			
+			<h:outputLabel value="Sobrenome "/>
+			<h:inputText value="#{comunicationBean3.sobrenome}"/>
+			
+			<h:outputLabel value="Data "/>
+			<h:outputLabel value="#{comunicationBean3.data}"/>
+
+			<h:outputLabel value="DataString "/>
+			<h:outputLabel value="#{comunicationBean3.dataString}"/>
+			
+			<h:outputLabel value="DataParseada "/>
+			<h:outputLabel value="#{comunicationBean3.dataParseada}"/>
+			
+			<h:outputLabel value="Data OminiFaces "/>
+			<h:outputLabel value="#{comunicationBean3.dataOminiFaces}"/>
+			
+			<h:outputLabel value="Data Converter "/>
+			<h:outputLabel value="#{comunicationBean3.dataConverter}"/>
+			<h:commandButton value="Salvar OmniFaces" action="#{comunicationBean3.save()}"/>
+		</h:panelGrid>
+	</o:form>
+</h:body>
+</html>

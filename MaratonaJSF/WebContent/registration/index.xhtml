@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" 
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+<h:head>
+
+</h:head>
+<h:body>	
+	<h1>Index página flow</h1>
+	<h:messages/>  <!-- Aparecerá a mensagem -->
+	<h:form>
+	<h:panelGrid columns="2">
+		<h:outputLabel value="Nome"/>
+		<h:inputText value="#{flowScopedBean.nome}" required="true" requiredMessage="O nome é obrigatório."/>
+
+		<h:outputLabel value="Sobrenome"/>
+		<h:inputText value="#{flowScopedBean.sobrenome}"/>
+		
+		<h:commandButton value="Next" action="registration2?faces-redirect=true"/>
+	</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

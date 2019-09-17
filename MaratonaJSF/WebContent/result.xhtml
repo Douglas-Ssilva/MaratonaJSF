@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://java.sun.com/jsf/html" 
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+		
+<h:head></h:head>
+<f:metadata>
+	<f:viewParam name="nome" value="#{comunicationResultBean.nome}"></f:viewParam>
+	<f:viewParam name="sobrenome" value="#{comunicationResultBean.sobrenome}"></f:viewParam>
+	<f:event listener="#{comunicationResultBean.init}" type="preRenderView"></f:event>
+</f:metadata>
+
+<h:body>
+<h1>Result 3 passando param pela tag viewAction</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome: "/>
+			<h:outputLabel value="#{comunicationResultBean.nome}"/>
+			<h:outputLabel value="Sobrenome "/>
+			<h:outputLabel value="#{comunicationResultBean.sobrenome}"/>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

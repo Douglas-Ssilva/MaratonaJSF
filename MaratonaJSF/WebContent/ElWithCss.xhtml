@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" 
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+<h:head>
+
+<script type="text/javascript">
+	function magica(nome) {
+		alert(nome);
+	}
+	
+	function magica2(nome) {
+		alert(nome);
+	}
+	
+</script>
+</h:head>
+<h:body>
+	<h:outputLabel value="----------List----------"/><br/>
+	<ui:repeat var="nomes" value="#{estudanteBean.estudante.nomesList}" varStatus="aux"> <!-- var auxiliar que podemos imprimir algumas coisas  -->
+		#{aux.index}-
+		<h:outputLabel value="#{nomes}" style="color: #{aux.index mod 2 == 0 ? 'red' : 'green'}"/><br/>
+	</ui:repeat><br/>
+	
+	<h:outputLabel value="--------Nomes-----------"/><br/>
+	<ui:repeat var="nome" value="#{estudanteBean.estudante.nomesArray}" varStatus="status">
+		#{status.index}-
+		<h:outputLabel value="#{nome}" style="color: #{status.index mod 2 == 0 ? 'blue' :'yellow' }"/><br/>
+	</ui:repeat><br/>
+	
+	<h:outputLabel value="--------------------"/><br/>
+	<h:form>
+			<h:commandButton value="Fazer mágica" onclick="magica('Hello wourld!')"/>
+			<h:commandButton value="Passando o nome do model" onclick="magica2('#{estudanteBean.estudante.nome}')"/>
+	</h:form>
+	
+</h:body>
+</html>

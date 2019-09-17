@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" 
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+</h:head>		
+<h:body>
+<!-- para fazer a comparação de tipos Enum -->
+<p:importEnum type="br.com.maratonajsf.model.enums.Turno" var="Turno" allSuffix="ALL_ENUM_VALUES" />
+
+	<h:outputLabel value="Index2"/><br/>
+	<h:outputLabel value="#{estudanteBean.estudante.nome}"/><br/>
+	<h:outputLabel value="#{estudanteBean.estudante.sobrenome}"/><br/>
+	<h:outputText value="-------Enum-------"/><br/>
+	<h:outputLabel value="#{estudanteBean.estudante.turno}"/><br/>
+	<h:outputLabel value="#{estudanteBean.estudante.turno eq Turno.NOTURNO}"/><br/>
+	<h:outputText value="-------Arrays-------"/><br/>
+	<h:outputLabel value="#{estudanteBean.estudante.nomesArray[1]} #{estudanteBean.estudante.nomesArray[2]} #{estudanteBean.estudante.nomesArray[0]}"/><br/>
+	<h:outputText value="Arrays ui:repeat"/><br/>
+	<ui:repeat var="nomes" value="#{estudanteBean.estudante.nomesArray}">
+		<h:outputLabel value="#{nomes}"/>
+	</ui:repeat><br/>
+	
+	<h:outputText value="-------List-------"/><br/>
+	<h:outputLabel value="#{estudanteBean.estudante.nomesList.get(0)} #{estudanteBean.estudante.nomesList.get(1)}"/><br/>
+	<h:outputText value="List ui:repeat"/><br/>
+	<ui:repeat var="nomes" value="#{estudanteBean.estudante.nomesList}">
+		<h:outputLabel value="#{nomes}"/>
+	</ui:repeat><br/>
+	
+	<h:outputText value="-------Set-------"/><br/>
+	<ui:repeat var="nomes" value="#{estudanteBean.estudante.nomesSet.toArray()}">
+		<h:outputLabel value="#{nomes}"/>
+	</ui:repeat><br/>
+	
+	<h:outputText value="-------Map-------"/><br/>
+	<h:outputText value="#{estudanteBean.estudante.nomesMap.get('Douglas')}"/><br/>
+	<h:outputText value="#{estudanteBean.estudante.nomesMap}"/><br/>
+	<ui:repeat var="nomes" value="#{estudanteBean.estudante.nomesMap.entrySet().toArray()}">
+		<h:outputLabel value="#{nomes.key} #{nomes.value}- "/>
+	</ui:repeat>
+</h:body>
+</html>
